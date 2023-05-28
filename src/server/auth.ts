@@ -55,11 +55,15 @@ export const authOptions: NextAuthOptions = {
       id: "jobber",
       name: "Jobber",
       type: "oauth",
-      clientId: process.env.JOBBER_CLIENT_ID,
-      clientSecret: process.env.JOBBER_CLIENT_SECRET,
-      authorization: "https://kauth.kakao.com/oauth/authorize",
-      token: "https://kauth.kakao.com/oauth/token",
-      userinfo: "https://kapi.kakao.com/v2/user/me",
+      clientId: env.JOBBER_CLIENT_ID,
+      clientSecret: env.JOBBER_CLIENT_SECRET,
+      checks: ["state"],
+      authorization: "https://api.getjobber.com/api/oauth/authorize",
+      token: "https://api.getjobber.com/api/oauth/token",
+      // userinfo: () => {
+      //   console.log(`fetchingUserInfo`);
+      //   return undefined;
+      // },
       profile(profile: {
         id: string;
         name: string;
@@ -74,15 +78,6 @@ export const authOptions: NextAuthOptions = {
         };
       },
     },
-    /**
-     * ...add more providers here.
-     *
-     * Most other providers require a bit more work than the Discord provider. For example, the
-     * GitHub provider requires you to add the `refresh_token_expires_in` field to the Account
-     * model. Refer to the NextAuth.js docs for the provider you want to use. Example:
-     *
-     * @see https://next-auth.js.org/providers/github
-     */
   ],
 };
 
